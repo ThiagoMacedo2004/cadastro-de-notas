@@ -1,0 +1,4 @@
+input.input-valor::-webkit-outer-spin-button,
+input.example-right-align::-webkit-inner-spin-button {
+  display: none;
+}

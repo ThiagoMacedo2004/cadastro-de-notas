@@ -1,7 +1,7 @@
 import { Routes } from "@angular/router";
 
 export const NOTAS_ROUTES: Routes = [
-  {path: 'notas', redirectTo:"lista-notas", pathMatch: 'full'},
+  {path: '', redirectTo:"lista-notas", pathMatch: 'full'},
 
   {
     path: 'lista-notas',

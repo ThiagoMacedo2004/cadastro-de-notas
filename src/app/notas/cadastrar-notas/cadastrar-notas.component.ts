@@ -11,6 +11,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
 })
 export class CadastrarNotasComponent implements OnInit {
 
+  filteredOptions: any = []
+
   constructor() { }
 
   ngOnInit(): void {

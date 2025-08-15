@@ -23,6 +23,7 @@ import { RouterModule } from '@angular/router';
 // import { TextMaskModule } from 'angular2-text-mask';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatRadioModule} from '@angular/material/radio';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 
 import localePtBr from '@angular/common/locales/pt';
@@ -80,8 +81,8 @@ const MY_DATE_FORMAT = {
     // TextMaskModule,
     MatStepperModule,
     HttpClientModule,
-    MatRadioModule
-
+    MatRadioModule,
+    MatAutocompleteModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'pt-br' },
@@ -114,7 +115,8 @@ const MY_DATE_FORMAT = {
     // TextMaskModule,
     MatStepperModule,
     HttpClientModule,
-    MatRadioModule
+    MatRadioModule,
+    MatAutocompleteModule
   ]
 })
 export class SharedModule { }

@@ -1,11 +1,46 @@
 <mat-card>
   <mat-card-title>Cadastrar notas</mat-card-title>
-  <mat-form-field appearance="outline">
-    <mat-label>Data da Nota</mat-label>
-    <input matInput [matDatepicker]="picker" maxlength="10">
-    <mat-hint>DD/MM/AAAA</mat-hint>
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
+  <mat-card-subtitle>Informe os dados da Nota fiscal</mat-card-subtitle>
+
+  <mat-card-content>
+
+    <mat-form-field class="example-full-width" appearance="outline">
+      <mat-label>Lojas</mat-label>
+      <input type="text" placeholder="Selecione uma Loja" matInput [matAutocomplete]="auto">
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+        <mat-option *ngFor="let option of filteredOptions" [value]="option">
+          {{option}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Data da Nota</mat-label>
+      <input matInput [matDatepicker]="picker" maxlength="10">
+      <mat-hint>DD/MM/AAAA</mat-hint>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="outline">
+      <mat-label>Tipo de Despesa</mat-label>
+      <input type="text" placeholder="Selecione uma Despesa" matInput [matAutocomplete]="auto">
+      <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+        <mat-option *ngFor="let option of filteredOptions" [value]="option">
+          {{option}}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+
+      <span matPrefix>R$</span>
+      <input class="input-valor" matInput type="number" placeholder="0.00" style="text-align: right;">
+
+    </mat-form-field>
+  </mat-card-content>
+
+
+
 
 </mat-card>
