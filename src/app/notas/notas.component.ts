@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatToolbarModule } from "@angular/material/toolbar";
+
 import { SharedModule } from '../shared/shared.module';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-notas',
@@ -12,9 +13,18 @@ import { SharedModule } from '../shared/shared.module';
 })
 export class NotasComponent implements OnInit {
 
-  constructor() { }
+  menu: any = [
+    {titulo: 'Lista de Notas', rota: '/notas/lista-notas', icon: 'list'},
+    {titulo: 'Cadastrar Notas', rota: '/notas/cadastrar-notas', icon: 'add_list'}
+  ]
+
+  constructor(private _router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  navegarMenus() {
+    this._router.navigate(['/notas/cadastrar-notas'])
   }
 
 }

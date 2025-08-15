@@ -1,0 +1,11 @@
+<mat-card>
+  <mat-card-title>Cadastrar notas</mat-card-title>
+  <mat-form-field appearance="outline">
+    <mat-label>Data da Nota</mat-label>
+    <input matInput [matDatepicker]="picker" maxlength="10">
+    <mat-hint>DD/MM/AAAA</mat-hint>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+</mat-card>

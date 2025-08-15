@@ -1,4 +1,4 @@
-import { enableProdMode, importProvidersFrom } from '@angular/core';
+import { enableProdMode, importProvidersFrom, LOCALE_ID } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { environment } from './environments/environment';
 import { bootstrapApplication } from '@angular/platform-browser';
@@ -9,6 +9,28 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Overlay } from '@angular/cdk/overlay';
 import { SharedService } from './app/shared/shared.service';
+
+import localePtBr from '@angular/common/locales/pt';
+import { registerLocaleData } from '@angular/common';
+import { MAT_DATE_FORMATS } from '@angular/material/core';
+
+import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
+
+
+registerLocaleData(localePtBr);
+
+const MY_DATE_FORMAT = {
+  parse: {
+    dateInput: 'DD/MM/YYYY', // this is how your date will be parsed from Input
+  },
+  display: {
+    dateInput: 'DD/MM/YYYY', // this is how your date will get displayed on the Input
+    monthYearLabel: 'MMMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
 
 if (environment.production) {
   enableProdMode();
@@ -21,7 +43,14 @@ bootstrapApplication(AppComponent, {
     importProvidersFrom(HttpClientModule),
     SharedService,
     MatSnackBar,
-    Overlay
-  ]
-})
-  .catch(err => console.error(err));
+    Overlay,
+
+    { provide: LOCALE_ID, useValue: 'pt-br' },
+    {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE],
+    },
+    { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMAT },
+  ],
+}).catch((err) => console.error(err));
