@@ -1,4 +1,54 @@
-input.input-valor::-webkit-outer-spin-button,
-input.example-right-align::-webkit-inner-spin-button {
-  display: none;
+mat-card {
+  width: 76%;
+  margin: 0 auto;
+  max-height: calc(100vh - 98px);
+}
+
+mat-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.formulario .inputs {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 22px;
+}
+
+.formulario .inputs>*:nth-child(3) {
+  flex: 1 1 auto;
+}
+
+.formulario .btns {
+  align-self: flex-end;
+}
+
+.subtitle-lista {
+  margin: 0;
+}
+
+.tabela-notas {
+  max-height: calc(100vh - 464px);
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+}
+
+.icon-delete:hover {
+  background-color: whitesmoke;
+  cursor: pointer;
+}
+
+tr[mat-row] {
+  height: 0;
 }
