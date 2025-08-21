@@ -31,8 +31,15 @@ mat-card-content {
   align-self: flex-end;
 }
 
+.titulo-tabela {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .subtitle-lista {
   margin: 0;
+  font-size: 1rem;
 }
 
 .tabela-notas {
@@ -44,9 +51,13 @@ table {
   width: 100%;
 }
 
-.icon-delete:hover {
-  background-color: whitesmoke;
-  cursor: pointer;
+.btn-excluir-nota {
+  transition: 600ms;
+}
+
+.btn-excluir-nota:hover {
+  background-color: antiquewhite;
+
 }
 
 tr[mat-row] {

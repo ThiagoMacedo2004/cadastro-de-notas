@@ -10,6 +10,11 @@ import { MyErrorStateMatcher } from 'src/app/shared/validade-form';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort, Sort } from '@angular/material/sort';
 import { LiveAnnouncer } from '@angular/cdk/a11y';
+import { SharedService } from 'src/app/shared/shared.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmarNotaDialogComponent } from '../notas-dialog/confirmar-nota-dialog/confirmar-nota-dialog.component';
+import { NotasService } from '../notas.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cadastrar-notas',
@@ -42,8 +47,12 @@ export class CadastrarNotasComponent implements OnInit {
   constructor(
     private _lojasService: LojasService,
     private _despesaService: DespesasService,
+    private _notasService: NotasService,
     private _fb: FormBuilder,
-    private _liveAnnouncer: LiveAnnouncer
+    private _liveAnnouncer: LiveAnnouncer,
+    private _sharedService: SharedService,
+    private _dialog: MatDialog,
+    private _router: Router
   ) { }
 
   @ViewChild(MatSort, {static: false}) set content(sort: MatSort) {
@@ -86,34 +95,77 @@ export class CadastrarNotasComponent implements OnInit {
     if(!this.formGroup.valid) {
       return
     }
+    // validar loja e despesa selecionados
+    this.validarLojaDespesa()
 
-    let nf = this.formGroup.value
-
-    // verificando os ids de loja e despesa
-    let loja: Loja = this.lojas.filter((l) => l.loja === nf.loja)[0]
-    let despesa: Despesa = this.despesas.filter((d) => d.despesa === nf.despesa)[0]
-
-    if(!loja || !despesa) {
-      return
-    }
-
-    // setando no formulario os ids de loja e despesa salvas
+    // setando no formulario o id da loja e despesa
+    let loja: Loja = this.lojas.filter((l) => l.loja === this.formGroup.get('loja')?.value)[0]
+    let despesa: Despesa = this.despesas.filter((d) => d.despesa === this.formGroup.get('despesa')?.value)[0]
     this.formGroup.get('idLoja')?.reset(loja.id)
     this.formGroup.get('idDespesa')?.reset(despesa.id)
 
     this.formGroup.get('dataNota')?.reset(this.dataDigitada, Validators.required)
 
-    // add nota no array de notas
-    this.notas.push(this.formGroup.value)
-    this.dataSource.data = this.notas
+    if(!this.validarValorRefeicao()) {
+      return
+    }
 
+    this.confirmarDadosNota()
+    // // add nota no array de notas
+    // this.notas.push(this.formGroup.value)
+    // this.dataSource.data = this.notas
 
-    // resetando formulario para gravar uma nova nota
-    this.resetarFormulario()
-
-    this.calcularValorTotal()
+    // // resetando formulario para gravar uma nova nota
+    // this.resetarFormulario()
+    // this.calcularValorTotal()
 
   }
+
+  confirmarDadosNota(){
+    this._dialog.open(ConfirmarNotaDialogComponent, {
+      data: this.formGroup.value,
+      width: '20%'
+    }).afterClosed().subscribe(
+      (result: boolean) => {
+        if(result) {
+          // add nota no array de notas
+          this.notas.push(this.formGroup.value)
+          this.dataSource.data = this.notas
+
+          // resetando formulario para gravar uma nova nota
+          this.resetarFormulario()
+          this.calcularValorTotal()
+        }
+      }
+    )
+  }
+
+  validarLojaDespesa() {
+
+    // verificando os ids de loja e despesa
+    let loja: Loja = this.lojas.filter((l) => l.loja === this.formGroup.get('loja')?.value)[0]
+    let despesa: Despesa = this.despesas.filter((d) => d.despesa === this.formGroup.get('despesa')?.value)[0]
+
+    if(!loja && !despesa) {
+       return this._sharedService.snackbar('Por favor, selecione corretamente a loja e/ou a despesa.')
+    } else if (!loja) {
+
+      return this._sharedService.snackbar('Por favor, selecione corretamente a loja.')
+    } else if(!despesa) {
+
+      return this._sharedService.snackbar('Por favor, selecione corretamente a despesa.')
+    }
+  }
+
+  validarValorRefeicao(): boolean {
+    if(this.formGroup.get('despesa')?.value === 'Refeição' && this.formGroup.get('valor')?.value > 25) {
+      this._sharedService.snackbar('Valor permitido para Refeição é de até R$ 25,00')
+      return false
+    }
+
+    return true
+  }
+
 
   calcularValorTotal() {
     let valorTotal: number = this.notas.reduce((a: any, b:Nota) => a + parseFloat(b.valor), 0)
@@ -123,6 +175,30 @@ export class CadastrarNotasComponent implements OnInit {
       style: 'currency',
       currency: 'BRL'
     })
+  }
+
+  salvarLote() {
+    let valorTotal: number = this.notas.reduce((a: number, b:Nota) => a + parseFloat(b.valor), 0)
+    const obj = {
+      acao: 'salvarNotas',
+      data: this.notas,
+      valorTotalNotas: valorTotal
+    }
+
+    this._notasService.salvarLote(JSON.stringify(obj)).subscribe({
+      next: (result: any) => {
+        if(result.sucesso) {
+          this._sharedService.snackbar(result.mensagem)
+          this._router.navigate(['notas/lista-notas'])
+        } else {
+          console.log(result)
+        }
+      },
+      error: (e: HttpErrorResponse) => this._sharedService.snackbar(e.message)
+      }
+    )
+
+
   }
 
   getLojas() {
@@ -158,7 +234,7 @@ export class CadastrarNotasComponent implements OnInit {
     return this.lojas.filter(loja => loja.loja.toLowerCase().includes(filterLoja))
   }
 
-   filtrandoDespesas(value: string): Despesa[] {
+  filtrandoDespesas(value: string): Despesa[] {
     const filterDespesa = value.toLowerCase()
 
     return this.despesas.filter(v => v.despesa.toLowerCase().includes(filterDespesa))
@@ -210,12 +286,13 @@ export class CadastrarNotasComponent implements OnInit {
   }
 
   resetarFormulario() {
-    this.formGroup.get('idLoja')?.reset('')
-    this.formGroup.get('loja')?.reset('')
-    this.formGroup.get('dataNota')?.reset('')
-    this.formGroup.get('idDespesa')?.reset('')
-    this.formGroup.get('despesa')?.reset('')
-    this.formGroup.get('valor')?.reset('')
+    this.formGroup.get('idLoja')?.reset('', Validators.required)
+    this.formGroup.get('loja')?.reset('', Validators.required)
+    this.formGroup.get('dataNota')?.reset('', Validators.required)
+    this.formGroup.get('idDespesa')?.reset('', Validators.required)
+    this.formGroup.get('despesa')?.reset('', Validators.required)
+    this.formGroup.get('valor')?.reset('', Validators.required)
+    // this.formularioNota()
 
     this.focoInputLoja()
   }

@@ -18,6 +18,7 @@ import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { LojasService } from './app/lojas/lojas.service';
 import { DespesasService } from './app/despesas/despesas.service';
+import { NotasService } from './app/notas/notas.service';
 
 
 registerLocaleData(localePtBr);
@@ -48,7 +49,7 @@ bootstrapApplication(AppComponent, {
     Overlay,
     LojasService,
     DespesasService,
-
+    NotasService,
     { provide: LOCALE_ID, useValue: 'pt-br' },
     {
       provide: DateAdapter,

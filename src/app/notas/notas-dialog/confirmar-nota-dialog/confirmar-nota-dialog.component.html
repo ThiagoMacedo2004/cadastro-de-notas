@@ -1,0 +1,15 @@
+<h1 mat-dialog-title>Confirmar os dados da Nota</h1>
+<mat-dialog-content class="mat-typography">
+  <div class="info-nota">
+    <p><strong>{{data.loja}}</strong></p>
+    <p>Data da Nota: <strong>{{data.dataNota | date: 'dd/MM/yyyy - EEEE' }}</strong></p>
+    <p>Tipo de Despesa: <strong>{{data.despesa}}</strong></p>
+    <p>Valor: <strong>{{data.valor | currency: 'BRL'}}</strong></p>
+  </div>
+
+  <h3>Os dados estão corretos ?</h3>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancelar</button>
+  <button mat-raised-button color="primary" cdkFocusInitial (click)="notaValidada()">Sim</button>
+</mat-dialog-actions>
