@@ -2,3 +2,20 @@ mat-card {
   width: 76%;
   margin: 0 auto;
 }
+
+table {
+  width: 100%;
+}
+
+table tr td:nth-child(6) {
+  text-align: center;
+}
+
+table tr td:nth-child(6) button {
+  background-color: aliceblue;
+}
+
+.msg span {
+  font-size: 1rem;
+  color: #777;
+}

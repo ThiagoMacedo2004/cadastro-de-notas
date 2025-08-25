@@ -1,16 +1,18 @@
 <mat-toolbar class="header mat-elevation-z8" color="primary">
+  <div class="container-header">
 
-  <div class="header-title">
-    <mat-icon class="mat-18">receipt_long</mat-icon>
-    <span>Cadastro de Notas</span>
+    <div class="header-title">
+      <mat-icon class="mat-18">receipt_long</mat-icon>
+      <span>Cadastro de Notas</span>
+    </div>
+    <nav>
+      <ul class="menu-list">
+        <li *ngFor="let item of menu" routerLinkActive="active" class="item-menu" routerLink="{{ item.rota }}">
+          <span class="titulo">{{ item.titulo }}</span>
+        </li>
+      </ul>
+    </nav>
   </div>
-  <nav>
-    <ul class="menu-list">
-      <li *ngFor="let item of menu" routerLinkActive="active" class="item-menu" routerLink="{{ item.rota }}">
-        <span class="titulo">{{ item.titulo }}</span>
-      </li>
-    </ul>
-  </nav>
 
 </mat-toolbar>
 <div class="container">

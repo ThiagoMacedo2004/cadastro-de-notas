@@ -1,0 +1,19 @@
+<h1 mat-dialog-title>
+  <span>Deletar Notas</span><mat-icon color="warn">delete_forever</mat-icon>
+</h1>
+<mat-dialog-content class="mat-typography">
+  <div class="informacoes">
+
+    <p>Lote: <span class="info-lote">{{ data.id }}</span></p>
+    <p>Data Lote: <span class="info-lote">{{data.data_lote | date: 'dd/MM/yyyy - EEEE'}}</span></p>
+    <p>Valor: <span class="info-lote">{{data.valor | currency: 'BRL'}}</span></p>
+
+  </div>
+
+  <h3>Tem certeza que deseja excluir esse lançamento ?</h3>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close cdkFocusInitial>Cancelar</button>
+  <button mat-raised-button color="primary" (click)="confirmaDelecaoNotas()">Sim</button>
+</mat-dialog-actions>

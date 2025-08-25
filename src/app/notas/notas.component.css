@@ -1,13 +1,8 @@
-.container {
-  padding: 16px;
-  height: calc(100vh - 64px);
-  background-color: #ebebebc9;
-}
-
-.header {
+.header .container-header {
   display: flex;
   justify-content: space-between;
-  padding: 0 24px;
+  width: 76%;
+  margin: 0 auto;
 }
 
 .header-title {
@@ -46,4 +41,10 @@
 
 .titulo {
   font-size: 0.875rem;
+}
+
+.container {
+  padding: 16px;
+  height: calc(100vh - 64px);
+  background-color: #ebebebc9;
 }
