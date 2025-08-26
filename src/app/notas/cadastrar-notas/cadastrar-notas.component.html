@@ -23,7 +23,7 @@
         <mat-form-field appearance="outline">
           <mat-label>Data da Nota</mat-label>
           <input id="data-nf" matInput formControlName="dataNota" [matDatepicker]="picker" maxlength="10"
-            (blur)="eventoData()">
+            >
           <!-- <mat-hint>DD/MM/AAAA</mat-hint> -->
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>

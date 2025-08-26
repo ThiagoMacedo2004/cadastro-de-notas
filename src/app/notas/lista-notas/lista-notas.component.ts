@@ -88,4 +88,60 @@ export class ListaNotasComponent implements OnInit {
     )
   }
 
+  excel(lote: any) {
+
+    const obj = {
+      acao: 'excelLote',
+      data: lote
+    }
+
+    this._notasService.excel(JSON.stringify(obj)).subscribe({
+      next: (result: any) => {
+        // console.log(result)
+        const file = new Blob([result], {
+          type: result.type
+        })
+
+        const blob = window.URL.createObjectURL(file)
+
+        const link = document.createElement('a')
+        link.href = blob
+        link.download = `lote-notinhas.xls`
+        link.click()
+
+        window.URL.revokeObjectURL(blob)
+        // link.remove()
+      },
+      error: (e: HttpErrorResponse) => this._sharedService.snackbar(e.message)
+    })
+  }
+
+  pdf(lote: any) {
+
+    const obj = {
+      acao: 'pdfRelatorio',
+      data: lote
+    }
+
+    this._notasService.excel(JSON.stringify(obj)).subscribe({
+      next: (result: any) => {
+        // console.log(result)
+        const file = new Blob([result], {
+          type: result.type
+        })
+
+        const blob = window.URL.createObjectURL(file)
+
+        const link = document.createElement('a')
+        link.href = blob
+        link.target = `relatorio_pdf.xls`
+        link.click()
+
+        window.URL.revokeObjectURL(blob)
+        link.remove()
+      },
+      error: (e: HttpErrorResponse) => this._sharedService.snackbar(e.message)
+    })
+  }
+
 }

@@ -14,8 +14,9 @@ import { Router } from '@angular/router';
 export class NotasComponent implements OnInit {
 
   menu: any = [
-    {titulo: 'Lista de Notas', rota: '/notas/lista-notas', icon: 'list'},
-    {titulo: 'Cadastrar Notas', rota: '/notas/cadastrar-notas', icon: 'add_list'}
+    {titulo: 'Resumo Lançamentos', rota: '/notas/lista-notas', icon: 'list'},
+    {titulo: 'Cadastrar Notas', rota: '/notas/cadastrar-notas', icon: 'add_list'},
+    {titulo: 'Lista de Notas', rota: '#', icon: 'add_list'},
   ]
 
   constructor(private _router: Router) { }

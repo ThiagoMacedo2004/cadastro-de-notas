@@ -51,15 +51,15 @@
             <button mat-icon-button (click)="detalhesLote(item)">
               <mat-icon class="icon">manage_search</mat-icon>
             </button>
-            <button mat-icon-button>
+            <button mat-icon-button (click)="excel(item)">
               <mat-icon class="icon">download</mat-icon>
             </button>
-            <button mat-icon-button>
+            <button mat-icon-button (click)="pdf(item)">
               <span class="material-symbols-outlined">
                 file_open
               </span>
             </button>
-            <button mat-icon-button (click)="dialogDeletarNotas(item)">
+            <button mat-icon-button (click)="dialogDeletarNotas(item)" [disabled]="item.data_vencimento" [ngClass]="{'btn-desabilidado': item.data_vencimento}">
               <mat-icon color="warn" class="icon">delete</mat-icon>
             </button>
           </td>

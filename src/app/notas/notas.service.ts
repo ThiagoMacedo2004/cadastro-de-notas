@@ -44,4 +44,16 @@ export class NotasService {
     return this._http.post(this.BASE_PATH, obj).pipe(first())
   }
 
+  public excel(obj: any) {
+    return this._http.post(this.BASE_PATH, obj, {
+      responseType: 'blob' as 'json'
+    }).pipe(first())
+  }
+
+  public pdfRelatorio(obj: any) {
+    return this._http.post(this.BASE_PATH, obj, {
+      responseType: 'blob' as 'json'
+    }).pipe(first())
+  }
+
 }

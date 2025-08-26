@@ -104,7 +104,7 @@ export class CadastrarNotasComponent implements OnInit {
     this.formGroup.get('idLoja')?.reset(loja.id)
     this.formGroup.get('idDespesa')?.reset(despesa.id)
 
-    this.formGroup.get('dataNota')?.reset(this.dataDigitada, Validators.required)
+    // this.formGroup.get('dataNota')?.reset(this.dataDigitada, Validators.required)
 
     if(!this.validarValorRefeicao()) {
       return
@@ -257,24 +257,24 @@ export class CadastrarNotasComponent implements OnInit {
 
   }
 
-  eventoData() {
-    let dataNf = (document.querySelector('#data-nf') as HTMLInputElement).value
+  // eventoData() {
+  //   let dataNf = (document.querySelector('#data-nf') as HTMLInputElement).value
 
-    if(!dataNf || dataNf.length < 10) {
+  //   if(!dataNf || dataNf.length < 10) {
 
-      return
-    }
-    let arrayData = dataNf.split('/')
+  //     return
+  //   }
+  //   let arrayData = dataNf.split('/')
 
-    let dia = Number(arrayData[0])
-    let mes = Number(arrayData[1]) - 1
-    let ano = Number(arrayData[2])
-    let dataFormatada = new Date()
+  //   let dia = Number(arrayData[0])
+  //   let mes = Number(arrayData[1]) - 1
+  //   let ano = Number(arrayData[2])
+  //   let dataFormatada = new Date()
 
-    dataFormatada.setFullYear(ano, mes, dia )
-    this.dataDigitada = dataFormatada
-    this.formGroup.get('dataNota')?.reset(this.dataDigitada, Validators.required)
-  }
+  //   dataFormatada.setFullYear(ano, mes, dia )
+  //   this.dataDigitada = dataFormatada
+  //   this.formGroup.get('dataNota')?.reset(this.dataDigitada, Validators.required)
+  // }
 
   getErrorMessage() {
     if (this.formGroup.get('dataNota')?.hasError('required')) {
