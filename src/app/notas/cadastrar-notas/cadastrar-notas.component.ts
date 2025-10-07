@@ -37,7 +37,7 @@ export class CadastrarNotasComponent implements OnInit {
   formGroup!: UntypedFormGroup
   matcher = new MyErrorStateMatcher();
   notas: Nota [] = []
-  valorTotalNotas: any = 'R$0,00'
+  valorTotalNotas: any = 'R$ 0,00'
 
 
   dataSource = new MatTableDataSource<Nota>()
@@ -256,25 +256,6 @@ export class CadastrarNotasComponent implements OnInit {
     // console.log(`R$ ${parseFloat(this.valorDigitado).toLocaleString('pt-BR')}`)
 
   }
-
-  // eventoData() {
-  //   let dataNf = (document.querySelector('#data-nf') as HTMLInputElement).value
-
-  //   if(!dataNf || dataNf.length < 10) {
-
-  //     return
-  //   }
-  //   let arrayData = dataNf.split('/')
-
-  //   let dia = Number(arrayData[0])
-  //   let mes = Number(arrayData[1]) - 1
-  //   let ano = Number(arrayData[2])
-  //   let dataFormatada = new Date()
-
-  //   dataFormatada.setFullYear(ano, mes, dia )
-  //   this.dataDigitada = dataFormatada
-  //   this.formGroup.get('dataNota')?.reset(this.dataDigitada, Validators.required)
-  // }
 
   getErrorMessage() {
     if (this.formGroup.get('dataNota')?.hasError('required')) {

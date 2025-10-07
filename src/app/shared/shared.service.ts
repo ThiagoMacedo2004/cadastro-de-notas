@@ -14,7 +14,7 @@ export class SharedService {
 
   public snackbar(data: string) {
     this._snackBar.openFromComponent(SnackBarComponent, {
-      duration: 5000,
+      duration: 6000,
       verticalPosition: 'top',
       data: data
     })

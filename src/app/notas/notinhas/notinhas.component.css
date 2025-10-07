@@ -1,0 +1,66 @@
+mat-card {
+  width: 76%;
+  margin: 0 auto;
+}
+
+mat-card-content {
+  margin-top: 26px;
+}
+
+.filtros {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.mat-radio-button~.mat-radio-button {
+  margin-left: 16px;
+}
+
+.filtros-campos {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.periodo {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  width: 80%;
+}
+
+.filtro {
+  flex: 0 1 30%;
+}
+
+.input-lote {
+  width: 41%;
+}
+
+.tabela {
+  max-height: calc(100vh - 326px);
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+}
+
+tr[mat-row]:nth-child(odd) {
+  background-color: whitesmoke;
+  height: 40px;
+}
+
+.visivel-lote {
+  display: none;
+  /* transition: 800ms; */
+  visibility: hidden;
+}
+
+.visivel-periodo {
+  display: none;
+  /* transition: 800ms; */
+  visibility: hidden;
+}

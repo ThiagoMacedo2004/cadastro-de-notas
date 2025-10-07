@@ -8,9 +8,14 @@ export const NOTAS_ROUTES: Routes = [
     loadComponent: () => import('./lista-notas/lista-notas.component').then(c => c.ListaNotasComponent)
   },
 
-    {
+  {
     path: 'cadastrar-notas',
     loadComponent: () => import('./cadastrar-notas/cadastrar-notas.component').then(c => c.CadastrarNotasComponent)
+  },
+
+  {
+    path: 'notinhas',
+    loadComponent: () => import('./notinhas/notinhas.component').then(c => c.NotinhasComponent)
   },
 
   {

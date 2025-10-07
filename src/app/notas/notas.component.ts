@@ -16,7 +16,7 @@ export class NotasComponent implements OnInit {
   menu: any = [
     {titulo: 'Resumo Lançamentos', rota: '/notas/lista-notas', icon: 'list'},
     {titulo: 'Cadastrar Notas', rota: '/notas/cadastrar-notas', icon: 'add_list'},
-    {titulo: 'Lista de Notas', rota: '#', icon: 'add_list'},
+    {titulo: 'Lista de Notas', rota: '/notas/notinhas', icon: 'add_list'},
   ]
 
   constructor(private _router: Router) { }
